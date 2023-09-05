@@ -1,18 +1,18 @@
 <?php
 /**
  * Venustheme
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Venustheme.com license that is
  * available through the world-wide-web at this URL:
  * http://www.venustheme.com/license-agreement.html
- * 
+ *
  * DISCLAIMER
- * 
+ *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
- * 
+ *
  * @category   Venustheme
  * @package    Ves_Setup
  * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
@@ -59,15 +59,19 @@ class Save extends \Magento\Backend\App\Action
      */
     protected $_configResource;
 
+    protected $_resource;
+
+    protected $mediaConfig;
+
     /**
-     * @param \Magento\Backend\App\Action\Context                          $context           
-     * @param \Magento\Framework\View\Result\PageFactory                   $resultPageFactory 
-     * @param \Ves\Setup\Helper\Import                                     $vesImport           
-     * @param \Magento\Framework\Filesystem                                $filesystem        
-     * @param \Magento\Store\Model\StoreManagerInterface                   $storeManager      
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface           $scopeConfig       
-     * @param \Magento\Framework\App\ResourceConnection                    $resource          
-     * @param \Magento\Framework\App\Config\ConfigResource\ConfigInterface $configResource    
+     * @param \Magento\Backend\App\Action\Context                          $context
+     * @param \Magento\Framework\View\Result\PageFactory                   $resultPageFactory
+     * @param \Ves\Setup\Helper\Import                                     $vesImport
+     * @param \Magento\Framework\Filesystem                                $filesystem
+     * @param \Magento\Store\Model\StoreManagerInterface                   $storeManager
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface           $scopeConfig
+     * @param \Magento\Framework\App\ResourceConnection                    $resource
+     * @param \Magento\Framework\App\Config\ConfigResource\ConfigInterface $configResource
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
@@ -156,7 +160,7 @@ class Save extends \Magento\Backend\App\Action
                             $exist = false;
                             $connection->query("SET FOREIGN_KEY_CHECKS=0;");
                             if(false !== strpos($table_name, "ves_")){
-                                
+
                                 $check_query = "SHOW TABLES LIKE '".$table_name."'";
                                 $total = $connection->fetchAll($check_query);
                                 if(count($total) > 0) {
@@ -181,7 +185,7 @@ class Save extends \Magento\Backend\App\Action
                             foreach ($rows as $row) {
                                 if($exist) {
                                     $where = '';
-                                    $query_data = $this->_vesImport->buildQueryImport($row, $table_name, $overwrite, $data['store_id']); 
+                                    $query_data = $this->_vesImport->buildQueryImport($row, $table_name, $overwrite, $data['store_id']);
                                     $connection->query($query_data[0].$where, $query_data[1]);
                                 }
                             }
