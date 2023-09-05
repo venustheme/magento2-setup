@@ -141,7 +141,7 @@ class Save extends \Magento\Backend\App\Action
             return $resultRedirect->setPath('*/*/');
         }
 
-        $importData = \Zend_Json::decode($fileContent);
+        $importData = \Laminas\Json\Json::decode($fileContent);
 
         $overwrite = false;
         if($data['overwrite_blocks']) {
