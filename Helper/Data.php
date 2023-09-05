@@ -1,18 +1,18 @@
 <?php
 /**
  * Venustheme
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Venustheme.com license that is
  * available through the world-wide-web at this URL:
  * http://www.venustheme.com/license-agreement.html
- * 
+ *
  * DISCLAIMER
- * 
+ *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
- * 
+ *
  * @category   Venustheme
  * @package    Ves_Setup
  * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
@@ -54,14 +54,18 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     protected $_moduleManager;
 
+    protected $_coreRegistry;
+
+    protected $_themeModel;
+
     /**
-     * @param \Magento\Framework\App\Helper\Context                      $context                
-     * @param \Magento\Store\Model\StoreManagerInterface                 $storeManager           
-     * @param \Magento\Framework\Registry                                $registry               
-     * @param \Magento\Cms\Model\Template\FilterProvider                 $filterProvider         
-     * @param \Magento\Theme\Model\ResourceModel\Theme\CollectionFactory $collectionThemeFactory 
-     * @param \Magento\Framework\Filesystem                              $filesystem           
-     * @param \Magento\Theme\Model\Theme                                 $themeModel             
+     * @param \Magento\Framework\App\Helper\Context                      $context
+     * @param \Magento\Store\Model\StoreManagerInterface                 $storeManager
+     * @param \Magento\Framework\Registry                                $registry
+     * @param \Magento\Cms\Model\Template\FilterProvider                 $filterProvider
+     * @param \Magento\Theme\Model\ResourceModel\Theme\CollectionFactory $collectionThemeFactory
+     * @param \Magento\Framework\Filesystem                              $filesystem
+     * @param \Magento\Theme\Model\Theme                                 $themeModel
      */
     public function __construct(
     	\Magento\Framework\App\Helper\Context $context,
@@ -94,7 +98,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->_moduleManager->isEnabled($moduleName);
     }
-    
+
     /**
      * Whether a module output is permitted by the configuration or not
      *
@@ -212,7 +216,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getVesTheme($storeId = NULL){
 
         $store = $this->_storeManager->getStore($storeId);
-        
+
         $themeId =  $this->scopeConfig->getValue(
             \Magento\Framework\View\DesignInterface::XML_PATH_THEME_ID,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,

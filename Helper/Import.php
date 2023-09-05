@@ -1,18 +1,18 @@
 <?php
 /**
  * Venustheme
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Venustheme.com license that is
  * available through the world-wide-web at this URL:
  * http://www.venustheme.com/license-agreement.html
- * 
+ *
  * DISCLAIMER
- * 
+ *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
- * 
+ *
  * @category   Venustheme
  * @package    Ves_Setup
  * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
@@ -27,12 +27,14 @@ class Import extends \Magento\Framework\App\Helper\AbstractHelper
 	/**
 	 * @var \Ves\Setup\Helper\Data
 	 */
-	protected $_vesData;
+	protected $_vesdata;
+
+    protected $_resource;
 
 	/**
-	 * @param \Magento\Framework\App\Helper\Context     $context  
-	 * @param \Magento\Framework\App\ResourceConnection $resource 
-	 * @param \Ves\Setup\Helper\Data                    $vesData  
+	 * @param \Magento\Framework\App\Helper\Context     $context
+	 * @param \Magento\Framework\App\ResourceConnection $resource
+	 * @param \Ves\Setup\Helper\Data                    $vesData
 	 */
 	public function __construct(
 		\Magento\Framework\App\Helper\Context $context,
