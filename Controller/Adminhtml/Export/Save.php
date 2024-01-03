@@ -1,18 +1,18 @@
 <?php
 /**
  * Venustheme
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Venustheme.com license that is
  * available through the world-wide-web at this URL:
  * http://www.venustheme.com/license-agreement.html
- * 
+ *
  * DISCLAIMER
- * 
+ *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
- * 
+ *
  * @category   Venustheme
  * @package    Ves_Setup
  * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
@@ -21,7 +21,7 @@
 namespace Ves\Setup\Controller\Adminhtml\Export;
 use Magento\Framework\Json\EncoderInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
-
+use Ves\Setup\Helper\SerializeService;
 
 class Save extends \Magento\Backend\App\Action
 {
@@ -48,11 +48,11 @@ class Save extends \Magento\Backend\App\Action
     protected $_filesystem;
 
     /**
-     * @param \Magento\Backend\App\Action\Context        $context           
-     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory 
-     * @param \Ves\Setup\Helper\Export                   $exportHelper      
-     * @param \Magento\Framework\App\ResponseInterface   $response          
-     * @param \Magento\Framework\Filesystem              $filesystem        
+     * @param \Magento\Backend\App\Action\Context        $context
+     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     * @param \Ves\Setup\Helper\Export                   $exportHelper
+     * @param \Magento\Framework\App\ResponseInterface   $response
+     * @param \Magento\Framework\Filesystem              $filesystem
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
@@ -109,7 +109,7 @@ class Save extends \Magento\Backend\App\Action
 
         if(!empty($content) && isset($params['isdowload']) && $params['isdowload'] ){
             $content['created_at'] = date("m/d/Y h:i:s a");
-            $content = \Zend_Json::encode($content);
+            $content = SerializeService::encode($content);
             $this->_sendUploadResponse($fileName, $content);
         }
 
@@ -118,7 +118,7 @@ class Save extends \Magento\Backend\App\Action
             $dir = $this->_filesystem->getDirectoryWrite(DirectoryList::APP);
             $file = null;
             $content['created_at'] = date("m/d/Y h:i:s a");
-            $content = \Zend_Json::encode($content);
+            $content = SerializeService::encode($content);
             $filePath = "design/frontend/{$folder}/backup/".$fileName;
             try{
                 $dir->writeFile($filePath, $content);
